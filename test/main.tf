@@ -1,5 +1,5 @@
 module "vpc" {
-  source = "vpc"
+  source = "../"
 
   key        = "my-awsome-project"
   aws_region = "eu-west-1"

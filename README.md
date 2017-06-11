@@ -7,14 +7,15 @@ For a standalone example see `test/main.tf`
 Example usages:
 ```
 module "vpc" {
-  source = "https://github.com/npalm/tf-vpc-aws.git"
+  source = "https://github.com/npalm/tf-aws-vpc.git"
 
   key        = "my-awsome-project"
   aws_region = "eu-west-1"
 
   // optional, defaults
-  create_private_hosted_zone = "false" // default = true
-  create_private_subnets     = "false" // default = true
+  create_private_hosted_zone = "true"
+  create_private_subnets     = "true"
+  cidr_block = "10.0.0.0/16"
 
   // example to override default availability_zones
   availability_zones = {
