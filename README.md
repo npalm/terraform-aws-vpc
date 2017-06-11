@@ -7,7 +7,7 @@ For a standalone example see `test/main.tf`
 Example usages:
 ```
 module "vpc" {
-  source = "https://github.com/npalm/tf-aws-vpc.git"
+  source = "https://github.com/npalm/tf-aws-vpc.git?ref=0.5"
 
   key        = "my-awsome-project"
   aws_region = "eu-west-1"
