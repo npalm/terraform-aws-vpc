@@ -64,8 +64,8 @@ resource "aws_route_table" "private_routetable" {
   vpc_id = "${aws_vpc.vpc.id}"
 
   route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.internet_gateway.id}"
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = "${aws_nat_gateway.nat.id}"
   }
 
   tags {
@@ -89,7 +89,7 @@ resource "aws_subnet" "private_subnet" {
 
 resource "aws_route_table_association" "private_routing_table" {
   subnet_id      = "${element(aws_subnet.private_subnet.*.id, count.index)}"
-  route_table_id = "${aws_route_table.public_routetable.id}"
+  route_table_id = "${aws_route_table.private_routetable.id}"
   count          = "${var.create_private_subnets ? length(var.availability_zones[var.aws_region]) : 0}"
 }
 
