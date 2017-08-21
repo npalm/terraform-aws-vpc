@@ -1,8 +1,8 @@
 module "vpc" {
   source = "../"
 
-  key        = "my-awsome-project"
-  aws_region = "eu-west-1"
+  environment = "my-awsome-project"
+  aws_region  = "eu-west-1"
 
   // optional, defaults
   create_private_hosted_zone = "false" // default = true

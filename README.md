@@ -9,8 +9,8 @@ Example usages:
 module "vpc" {
   source = "git::https://github.com/npalm/tf-aws-vpc.git?ref=0.5"
 
-  key        = "my-awsome-project"
-  aws_region = "eu-west-1"
+  environment = "my-awsome-project"
+  aws_region  = "eu-west-1"
 
   // optional, defaults
   create_private_hosted_zone = "true"

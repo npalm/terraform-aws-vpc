@@ -12,8 +12,8 @@ resource "aws_vpc" "vpc" {
   enable_dns_hostnames = true
 
   tags {
-    Name = "${var.key}-vpc"
-    Key  = "${var.key}"
+    Name        = "${var.environment}-vpc"
+    Environment = "${var.environment}"
   }
 }
 
@@ -21,8 +21,8 @@ resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = "${aws_vpc.vpc.id}"
 
   tags {
-    Name = "${var.key}-internet-gateway"
-    Key  = "${var.key}"
+    Name        = "${var.environment}-internet-gateway"
+    Environment = "${var.environment}"
   }
 }
 
@@ -35,8 +35,8 @@ resource "aws_route_table" "public_routetable" {
   }
 
   tags {
-    Name = "${var.key}-public-routetable"
-    Key  = "${var.key}"
+    Name        = "${var.environment}-public-routetable"
+    Environment = "${var.environment}"
   }
 }
 
@@ -48,8 +48,8 @@ resource "aws_subnet" "public_subnet" {
   count                   = "${length(var.availability_zones[var.aws_region])}"
 
   tags {
-    Name = "${var.key}-${element(var.availability_zones[var.aws_region], count.index)}-public"
-    Key  = "${var.key}"
+    Name        = "${var.environment}-${element(var.availability_zones[var.aws_region], count.index)}-public"
+    Environment = "${var.environment}"
   }
 }
 
@@ -69,8 +69,8 @@ resource "aws_route_table" "private_routetable" {
   }
 
   tags {
-    Name = "${var.key}-private-routetable"
-    Key  = "${var.key}"
+    Name        = "${var.environment}-private-routetable"
+    Environment = "${var.environment}"
   }
 }
 
@@ -82,8 +82,8 @@ resource "aws_subnet" "private_subnet" {
   count                   = "${var.create_private_subnets ? length(var.availability_zones[var.aws_region]) : 0}"
 
   tags {
-    Name = "${var.key}-${element(var.availability_zones[var.aws_region], count.index)}-private"
-    key  = "${var.key}"
+    Name        = "${var.environment}-${element(var.availability_zones[var.aws_region], count.index)}-private"
+    Environment = "${var.environment}"
   }
 }
 
@@ -105,12 +105,12 @@ resource "aws_nat_gateway" "nat" {
 
 resource "aws_route53_zone" "local" {
   count   = "${var.create_private_hosted_zone ? 1 : 0}"
-  name    = "${var.key}.local"
-  comment = "${var.key} - route53 - local hosted zone"
+  name    = "${var.environment}.local"
+  comment = "${var.environment} - route53 - local hosted zone"
 
   tags {
-    Name = "${var.key}-route53-private-hosted-zone"
-    Key  = "${var.key}"
+    Name        = "${var.environment}-route53-private-hosted-zone"
+    Environment = "${var.environment}"
   }
 
   vpc_id = "${aws_vpc.vpc.id}"
