@@ -1,22 +1,24 @@
 variable "environment" {
-  type    = "string"
-  default = "vpc-dev"
+  description = "A logical name that will be used as prefix and tag for the created resources."
+  type        = "string"
+  default     = "vpc-dev"
 }
 
 variable "aws_region" {
   type        = "string"
-  description = "The Amazon region"
+  description = "The Amazon region."
 }
 
 variable "cidr_block" {
-  default = "10.0.0.0/16"
+  description = "The CDIR block used for the VPC."
+  default     = "10.0.0.0/16"
 }
 
 variable "availability_zones" {
   type = "map"
 
   default = {
-    us-east-1      = ["us-east-1a", "eu-east-1b", "us-east-1c", "eu-east-1e", "us-east-1e", "us-east-1f"]
+    us-east-1      = ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1e", "us-east-1f"]
     us-east-2      = ["us-east-2a", "eu-east-2b", "eu-east-2c"]
     us-west-1      = ["us-west-1a", "us-west-1c"]
     us-west-2      = ["us-west-2a", "us-west-2b", "us-west-2c"]
@@ -28,20 +30,23 @@ variable "availability_zones" {
     sa-east-1      = ["sa-east-1a", "sa-east-1c"]
     ap-northeast-1 = ["ap-northeast-1a", "ap-northeast-1c"]
     ap-southeast-1 = ["ap-southeast-1a", "ap-southeast-1b"]
-    ap-southeast-1 = ["ap-southeast-2a", "ap-southeast-2b", "ap-southeast-2c"]
+    ap-southeast-2 = ["ap-southeast-2a", "ap-southeast-2b", "ap-southeast-2c"]
     ap-northeast-1 = ["ap-northeast-1a", "ap-northeast-1c"]
-    ap-northeast-1 = ["ap-northeast-2a", "ap-northeast-2c"]
+    ap-northeast-2 = ["ap-northeast-2a", "ap-northeast-2c"]
   }
 }
 
 variable "create_private_subnets" {
-  default = "true"
+  description = "If true create a private subnet for each availability zone including a NAT gateway."
+  default     = "true"
 }
 
 variable "create_private_hosted_zone" {
-  default = "true"
+  description = "If true a privated hosted zone is created."
+  default     = "true"
 }
 
 variable "public_subnet_map_public_ip_on_launch" {
-  default = "false"
+  description = "Set the default behavior for instances created in the VPC. If true by default a publi ip will be assigned."
+  default     = "false"
 }
